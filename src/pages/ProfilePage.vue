@@ -1,11 +1,19 @@
 <template>
     <div class="container">
         <section v-if="profile" class="row">
-            <div class="col-12 border border-secondary m-3 px-3 pt-3 pb-0 rounded-3 shadow">
-                <img :src="profile.coverImg" alt="" class="cover-img w-100">
+            <div class="col-12 border border-secondary m-3 px-0 pt-0 pb-0 rounded-3 shadow">
+                <img :src="profile.coverImg" alt="" class="cover-img w-100 rounded-top-3">
                 <img :src="profile.picture" :alt="profile.name" class=" ms-5 profile-picture">
-                <h1 class="mt-2">{{ profile.name }}</h1>
-                <p>{{ profile.bio }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="ms-3">
+                        <h1 class="mt-2">{{ profile.name }}</h1>
+                        <p>{{ profile.bio }}</p>
+                    </div>
+                    <!-- TODO make this an edit profile button -->
+                    <i v-if="account.id && account.id == profile.id" class="mdi mdi-account-edit display-3"
+                        title="Edit Your Profile" role="button"></i>
+                </div>
+
             </div>
 
         </section>
@@ -54,13 +62,17 @@ export default {
             }
         }
 
+
+
         onMounted(() => {
+            profileService.clearAppState()
             getProfileById();
             getPostsByCreatorId();
         });
         return {
             profile: computed(() => AppState.activeProfile),
-            posts: computed(() => AppState.posts)
+            posts: computed(() => AppState.posts),
+            account: computed(() => AppState.account)
         };
     },
     components: { PostCard }

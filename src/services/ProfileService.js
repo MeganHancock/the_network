@@ -12,9 +12,9 @@ class ProfileService {
         logger.log(AppState.activeProfile)
     }
 
-    // clearAppState() {
-    //     AppState.activeProfile = null
-    // }
+    clearAppState() {
+        AppState.activeProfile = null
+    }
 }
 
 export const profileService = new ProfileService()
