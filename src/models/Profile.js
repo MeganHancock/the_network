@@ -7,6 +7,10 @@ export class Profile {
         this.bio = data.bio
         this.coverImg = data.coverImg
         this.graduated = data.graduated
+        this.linkedin = data.linkedin
+        this.github = data.github
+        this.resume = data.resume
+        this.class = data.class || ''
         this.memberSince = new Date(data.createdAt).toLocaleDateString()
     }
 }

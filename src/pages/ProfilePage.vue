@@ -3,7 +3,22 @@
         <section v-if="profile" class="row">
             <div class="col-12 border border-secondary m-3 px-0 pt-0 pb-0 rounded-3 shadow">
                 <img :src="profile.coverImg" alt="" class="cover-img w-100 rounded-top-3">
-                <img :src="profile.picture" :alt="profile.name" class=" ms-5 profile-picture">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <img :src="profile.picture" :alt="profile.name" class=" ms-5 profile-picture">
+                        <div class="d-flex align-items-center">
+                            <i v-if="profile.graduated" class="mdi mdi-school display-5 m-2"></i>
+                            <p v-if="profile.class" class="m-1 fw-bold">Class of {{ profile.class }}</p>
+                        </div>
+                    </div>
+                    <div class="m-2 display-5">
+                        <!-- TODO make these buttons -->
+                        <i v-if="profile.linkedin" class="mdi  mdi-linkedin me-2"></i>
+                        <i v-if="profile.github" class="mdi  mdi-github me-2"></i>
+                        <i v-if="profile.resume" class="mdi  mdi-file-document-outline"></i>
+                    </div>
+
+                </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="ms-3">
                         <h1 class="mt-2">{{ profile.name }}</h1>
