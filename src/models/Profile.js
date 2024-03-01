@@ -1,17 +1,13 @@
 export class Profile {
     constructor(data) {
-        export class Profile {
-            constructor(data) {
-                this.id = data._id
-                this.email = data.email
-                this.name = data.name
-                this.picture = data.picture
-                this.bio = data.bio
-                this.coverImg = data.coverImg
-                this.graduated = data.graduated
-                this.memberSince = new Date(data.createdAt).toLocaleDateString()
-            }
-        }
+        this.id = data._id
+        this.email = data.email
+        this.name = data.name
+        this.picture = data.picture
+        this.bio = data.bio
+        this.coverImg = data.coverImg
+        this.graduated = data.graduated
+        this.memberSince = new Date(data.createdAt).toLocaleDateString()
     }
 }
 

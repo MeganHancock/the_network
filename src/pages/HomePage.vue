@@ -2,7 +2,7 @@
   <div class="container">
 
     <section class="row">
-      <div class="col-8 border border-secondary m-3 px-3 pt-3 pb-0 rounded-3 shadow">
+      <div class="col-md-8 border border-secondary m-3 px-3 pt-3 pb-0 rounded-3 shadow">
         <div class="d-flex">
           <!-- <img :src="post.creator.picture" :alt="post.creator.name" class="creator-picture"> -->
           <form>
@@ -14,7 +14,7 @@
 
 
     <section class="row">
-      <div v-for="post in posts" class="col-8 border border-secondary m-3 px-3 pt-3 pb-0 rounded-3 shadow">
+      <div v-for="post in posts" class="col-md-6 border border-secondary m-3 px-3 pt-3 pb-0 rounded-3 shadow">
         <PostCard :post="post" />
       </div>
     </section>

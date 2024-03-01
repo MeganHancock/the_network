@@ -13,6 +13,13 @@ class PostsService {
         // logger.log('posts response mapped', foundPosts)
         AppState.posts = foundPosts
     }
+
+    async getPostsByCreatorId(profileId) {
+        const response = await api.get(`api/posts?creatorId=${profileId}`)
+        // logger.log('posts found?', response.data.posts)
+        const foundPosts = response.data.posts.map(postsPOJO => new Post(postsPOJO))
+        AppState.posts = foundPosts
+    }
 }
 
 export const postsService = new PostsService()
