@@ -18,7 +18,7 @@ export default {
     }
 
     onMounted(() => {
-      logger.log('home page mounted')
+      // logger.log('home page mounted')
       getPosts()
     })
 
