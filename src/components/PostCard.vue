@@ -3,9 +3,13 @@
 
         <div class="d-flex align-items-center">
             <!-- TODO create router-link to route to profile page -->
-            <img :src="post.creator.picture" :alt="post.creator.name" class="creator-picture">
+            <router-link :to="{ name: 'Profile', params: { profileId: post.creatorId } }">
+                <img :src="post.creator.picture" :alt="post.creator.name" class="creator-picture">
+            </router-link>
             <div class="ms-3">
-                <p class="fs-6 fw-bold pb-0 mb-0">{{ post.creator.name }}</p>
+                <router-link :to="{ name: 'Profile', params: { profileId: post.creatorId } }">
+                    <p class="text-dark fs-6 fw-bold pb-0 mb-0">{{ post.creator.name }}</p>
+                </router-link>
                 <p class="fw-lighter">{{ post.timeCreatedAt }} on {{ post.dateCreatedAt }}</p>
             </div>
         </div>
@@ -30,15 +34,22 @@
 
 
 <script>
+import { computed } from 'vue';
+import { Account } from '../models/Account.js';
 import { Post } from '../models/Post.js';
 import { logger } from '../utils/Logger.js';
+import { AppState } from '../AppState.js';
 
 export default {
     props: {
         post: { type: Post, required: true }
+
     },
     setup() {
-        return {}
+        return {
+            account: computed(() => AppState.account)
+
+        }
     }
 }
 </script>
