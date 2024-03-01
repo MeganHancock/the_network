@@ -5,8 +5,8 @@ export class Post {
         this.imgUrl = data.imgUrl
         this.creatorId = data.creatorId
         this.likeIds = data.likeIds
-        this.timeCreatedAt = new Date(data.createdAt).toLocaleTimeString
-        this.dateCreatedAt = new Date(data.createdAt).toLocaleDateString
+        this.timeCreatedAt = new Date(data.createdAt).toLocaleTimeString()
+        this.dateCreatedAt = new Date(data.createdAt).toLocaleDateString()
         // this.timeUpdatedAt = new Date(data.updatedAt).toLocaleTimeString
         // this.dateUpdatedAt = new Date(data.updatedAt).toLocaleDateString
         this.creator = data.creator
