@@ -11,10 +11,9 @@
         </section>
 
         <section class="row ">
-            <div class="col-md-8 border border-secondary m-3 px-3 pt-3 pb-0 rounded-3 shadow">
-                <div v-for="post in posts" :key="post.id">
-                    <PostCard :post="post" />
-                </div>
+            <div v-for="post in posts" :key="post.id"
+                class="col-md-8 border border-secondary m-3 px-3 pt-3 pb-0 rounded-3 shadow">
+                <PostCard :post="post" />
             </div>
         </section>
 
