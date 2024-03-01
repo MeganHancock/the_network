@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-content-between">
+    <div class=" d-flex justify-content-between">
 
         <div class="d-flex align-items-center">
             <!-- TODO create router-link to route to profile page -->

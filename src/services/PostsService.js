@@ -20,6 +20,8 @@ class PostsService {
         const foundPosts = response.data.posts.map(postsPOJO => new Post(postsPOJO))
         AppState.posts = foundPosts
     }
+
+
 }
 
 export const postsService = new PostsService()
