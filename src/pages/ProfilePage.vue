@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
-        <section v-if="profile" class="row">
-            <div class="col-12 border border-secondary m-3 px-0 pt-0 pb-0 rounded-3 shadow">
+    <div class="container ">
+        <section v-if="profile" class="row ">
+            <div class="col-12 border border-secondary me-1 m-3 px-0 pt-0 pb-0 rounded-3 shadow">
                 <img :src="profile.coverImg" alt="" class="cover-img w-100 rounded-top-3">
                 <div class="d-flex justify-content-between">
                     <div class="d-flex">
@@ -13,9 +13,9 @@
                     </div>
                     <div class="m-2 display-5">
                         <!-- TODO make these buttons -->
-                        <i v-if="profile.linkedin" class="mdi  mdi-linkedin me-2"></i>
-                        <i v-if="profile.github" class="mdi  mdi-github me-2"></i>
-                        <i v-if="profile.resume" class="mdi  mdi-file-document-outline"></i>
+                        <a :href="profile.linkedin" v-if="profile.linkedin" class="mdi  mdi-linkedin me-2"></a>
+                        <a :href="profile.github" v-if="profile.github" class="mdi  mdi-github me-2"></a>
+                        <a :href="profile.resume" v-if="profile.resume" class="mdi  mdi-file-document-outline"></a>
                     </div>
 
                 </div>

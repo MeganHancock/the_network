@@ -21,6 +21,12 @@ class PostsService {
         AppState.posts = foundPosts
     }
 
+    async postNewPost(formData) {
+        const response = await api.post('api/posts', formData)
+        logger.log('created post', response.data)
+        const newPost = new Post(response.data)
+        AppState.posts.push(newPost)
+    }
 
 }
 

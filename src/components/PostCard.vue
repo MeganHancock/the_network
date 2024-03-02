@@ -23,7 +23,7 @@
     <div class="text-end pb-0 mb-0">
         <!-- TODO hook up likes -->
         <!-- <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i> -->
-        <p class="pb-0 mb-1">Likes 23
+        <p v-if="post.likeIds" class="pb-0 mb-1">{{ post.likeIds.length }} Likes
             <span class="fs-4">
                 <i class="mdi mdi-heart"></i>
                 <i class="mdi mdi-heart-outline"></i>

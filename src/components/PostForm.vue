@@ -1,29 +1,31 @@
 <template>
-    <div class="col-10 border border-secondary m-3 p-3 rounded-3 shadow">
+    <div class="col-md-10 border border-secondary m-3 py-3 ps-0 rounded-3 shadow">
         <section class="row">
             <div class="col-1">
-                <img :src="account.picture" :alt="account.name" class="creator-picture me-2">
+                <img :src="account.picture" :alt="account.name" class="creator-picture m-2 me-2 d-md-block d-none">
             </div>
 
-            <div class="col-11">
-                <form>
+            <div class="col-md-10 ms-1">
+                <form @submit.prevent="postNewPost()">
                     <div class="form-floating flex-fill">
-                        <textarea class="form-control w-100 h-100  flex-fill" placeholder="Leave a comment here"
-                            id="formImgUrl" style="height: 100px; width: 100vh"></textarea>
-                        <label for="floatingTextarea2">Comments</label>
+                        <textarea v-model="formData.body" class="form-control w-100 h-100  flex-fill ms-1"
+                            placeholder="What's on your mind?" id="formImgUrl"
+                            style="height: 100px; width: 100vh"></textarea>
+                        <label for="floatingTextarea2"></label>
                     </div>
 
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between ms-0 ">
                         <div class="d-flex align-items-center">
                             <i class="mdi mdi-camera fs-3 me-1"></i>
-                            <input type="url" name="imgUrl" id="formImgUrl" placeholder="Image URL" class="rounded-2">
+                            <input v-model="formData.imgUrl" type="url" name="imgUrl" id="formImgUrl"
+                                placeholder="Image URL" class="rounded-2">
                         </div>
                         <!-- TODO make this a POST button -->
-                        <div class="d-flex align-items-center">
-                            <p class="mt-3">Post!
+                        <button type="submit" role="button" class="d-flex align-items-center border-0">
+                            <p class="mt-3 me-1">Post!
                             </p>
                             <i class="mdi mdi-send fs-3"></i>
-                        </div>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -33,9 +35,12 @@
 
 
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { Account } from '../models/Account.js';
 import { AppState } from '../AppState.js';
+import Pop from '../utils/Pop.js';
+import { logger } from '../utils/Logger.js';
+import { postsService } from '../services/PostsService.js';
 
 export default {
     props: {
@@ -43,8 +48,22 @@ export default {
     },
 
     setup() {
+        const formData = ref({})
+
+
         return {
-            account: computed(() => AppState.account)
+            formData,
+            account: computed(() => AppState.account),
+
+            async postNewPost() {
+                try {
+                    logger.log('postNewPost', formData.value)
+                    await postsService.postNewPost(formData.value)
+                    formData.value = {}
+                } catch (error) {
+                    Pop.error(error)
+                }
+            }
         }
     }
 }
