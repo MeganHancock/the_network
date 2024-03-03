@@ -22,6 +22,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="ms-3">
                         <h1 class="mt-2">{{ profile.name }}</h1>
+                        <p class="lighter">Member since {{ profile.memberSince }}</p>
                         <p>{{ profile.bio }}</p>
                     </div>
 

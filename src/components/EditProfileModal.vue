@@ -116,6 +116,7 @@ export default {
         const editableProfileData = ref({})
 
         watch(profile, () => { editableProfileData.value = { ...profile.value } }, { immediate: true })
+        // watch(account, () => { editableProfileData.value = { ...account.value } }, { immediate: true })
 
 
         return {

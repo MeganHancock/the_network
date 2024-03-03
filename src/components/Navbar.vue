@@ -13,6 +13,15 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
+
+
+          <div class="input-group m-3">
+            <input type="text" class="form-control" placeholder="Find a user or post..." aria-label="Recipient's username"
+              aria-describedby="button-addon2">
+            <router-link :to="{ name: 'SearchResults' }">
+              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+            </router-link>
+          </div>
           <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
             About
           </router-link> -->
