@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-10 border border-secondary m-3 py-3 ps-0 rounded-3 shadow">
+    <div class="col-12 border border-secondary m-3 py-3 ps-0 rounded-3 shadow">
         <section class="row">
             <div class="col-1">
                 <img :src="account.picture" :alt="account.name" class="creator-picture m-2 me-2 d-md-block d-none">
