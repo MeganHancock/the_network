@@ -19,14 +19,26 @@
                     </div>
 
                 </div>
+
+
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="ms-3">
                         <h1 class="mt-2">{{ profile.name }}</h1>
                         <p>{{ profile.bio }}</p>
                     </div>
+
+
+
                     <!-- TODO make this an edit profile button -->
-                    <i v-if="account.id && account.id == profile.id" class="mdi mdi-account-edit display-3"
-                        title="Edit Your Profile" role="button"></i>
+                    <button v-if="account.id && account.id == profile.id" type="button" data-bs-toggle="modal"
+                        data-bs-target="#modal" class="border-0 m-1">
+                        <i class="mdi mdi-account-edit display-3" title="Edit Your Profile" role="button"></i>
+                    </button>
+
+
+
+
+
                 </div>
 
             </div>
