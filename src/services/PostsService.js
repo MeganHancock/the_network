@@ -38,6 +38,11 @@ class PostsService {
 
     }
 
+    async removePost(postId) {
+        const response = await api.delete(`api/posts/${postId}`)
+        logger.log('removed post', response.data)
+    }
+
 }
 
 export const postsService = new PostsService()

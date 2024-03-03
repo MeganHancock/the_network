@@ -13,8 +13,30 @@
                 <p class="fw-lighter">{{ post.timeCreatedAt }} on {{ post.dateCreatedAt }}</p>
             </div>
         </div>
+
         <!-- TODO  edit post button, only display if ID matches  -->
-        <i class="mdi mdi-dots-horizontal fs-3"></i>
+
+
+
+        <!-- TODO CREATE DROPDOWN COMPONENT -->
+        <div class="dropdown">
+            <button v-if="account.id && account.id == post.creator.id" class="border-0" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="mdi mdi-dots-horizontal fs-3"></i>
+
+            </button>
+            <ul class="dropdown-menu">
+                <li><a @click="console.log('TODO: make this button do stuff')" class="dropdown-item" href="#">Edit Post</a>
+                </li>
+                <li><a @click="removePost(`${post.id}`)" class="text-danger fw-bold dropdown-item" href="#">Delete Post</a>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+
     </div>
 
     <p class="mx-4 mt-2">{{ post.body }}</p>
@@ -61,8 +83,23 @@ export default {
                 } catch (error) {
                     Pop.error(error)
                 }
+            },
+
+            async removePost(postId) {
+                // logger.log('removing post')
+                try {
+                    const wantsToDelete = await Pop.confirm('Are you sure you would like to delete this post?')
+                    if (!wantsToDelete) {
+                        return
+                    }
+                    await postsService.removePost(postId)
+                    Pop.success('Post was deleted!')
+                } catch (error) {
+                    Pop.error(error)
+                }
+
             }
-            // 
+
         }
     }
 }

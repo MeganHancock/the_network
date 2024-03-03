@@ -100,6 +100,7 @@ import { AppState } from '../AppState.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { profileService } from '../services/ProfileService.js';
+import { useRoute, useRouter } from 'vue-router';
 
 export default {
 
@@ -109,6 +110,8 @@ export default {
 
 
     setup() {
+        const router = useRouter()
+
         const profile = computed(() => AppState.account)
         const editableProfileData = ref({})
 
@@ -118,12 +121,15 @@ export default {
         return {
             editableProfileData,
             profile,
+            router,
             // profile: computed(() => AppState.account),
 
             async updateProfile() {
                 try {
                     logger.log('submitting form', editableProfileData.value)
                     await profileService.updateProfile(editableProfileData.value)
+                    // router.push({ name: 'ProfilePage' })
+
                 } catch (error) {
                     Pop.error(error)
                 }
