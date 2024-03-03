@@ -42,10 +42,35 @@
 
         </section>
 
-        <section class="row ">
-            <div v-for="post in posts" :key="post.id"
+
+
+
+        <section class="row justify-content-between p-3">
+
+            <!-- <div v-for="post in posts" :key="post.id"
                 class="col-md-8 border border-secondary m-3 px-3 pt-3 pb-0 rounded-3 shadow">
                 <PostCard :post="post" />
+            </div> -->
+
+            <div class="col-md-8 ms-md-4">
+                <section v-for=" post  in  posts " class="row">
+                    <div class="col-12 border border-secondary px-3 pt-3 pb-0 rounded-3 shadow mb-4">
+                        <PostCard :post="post" />
+
+                    </div>
+                </section>
+            </div>
+
+
+
+            <div class="col-md-3 d-md-block d-none d-flex justify-content-center">
+                <section class="row justify-content-center">
+                    <div v-for="ad in ads" class="col-12 mb-4">
+                        <AdComponent :ad="ad" />
+                        <!-- <img :src="ad.tall" :alt="ad.title" class="img-fluid rounded-3 shadow border border-secondary w-100"> -->
+                    </div>
+
+                </section>
             </div>
         </section>
 
@@ -63,6 +88,8 @@ import { AppState } from '../AppState.js';
 import PostCard from '../components/PostCard.vue';
 import { postsService } from '../services/PostsService.js';
 import EditProfileModal from '../components/EditProfileModal.vue';
+import AdComponent from '../components/AdComponent.vue';
+import { adsService } from '../services/AdsService.js';
 
 export default {
     setup() {
@@ -92,21 +119,31 @@ export default {
             }
         }
 
+        async function getAds() {
+            try {
+                await adsService.getAds();
+            }
+            catch (error) {
+                Pop.error(error);
+            }
+        }
 
 
         onMounted(() => {
             profileService.clearAppState()
             getProfileById();
             getPostsByCreatorId();
+            getAds();
         });
         return {
             posts: computed(() => AppState.posts),
             account: computed(() => AppState.account),
-            profile: computed(() => AppState.activeProfile)
+            profile: computed(() => AppState.activeProfile),
+            ads: computed(() => AppState.ads)
             // profile
         };
     },
-    components: { PostCard, EditProfileModal }
+    components: { PostCard, EditProfileModal, AdComponent }
 }
 </script>
 <style lang="scss" scoped>
