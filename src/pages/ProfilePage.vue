@@ -34,7 +34,7 @@
                         <i class="mdi mdi-account-edit display-3" title="Edit Your Profile" role="button"></i>
                     </button>
 
-                    <EditProfileModal :profile="profile" />
+                    <EditProfileModal :profile="profileKey" />
 
                 </div>
 
@@ -57,7 +57,7 @@
 import { useRoute } from 'vue-router';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { profileService } from '../services/ProfileService.js';
 import { AppState } from '../AppState.js';
 import PostCard from '../components/PostCard.vue';
@@ -66,6 +66,11 @@ import EditProfileModal from '../components/EditProfileModal.vue';
 
 export default {
     setup() {
+        // const profile = computed(() => AppState.activeProfile)
+
+        // watch(profile, () => { getProfileById }, { immediate: true })
+        // watch(account, () => { getProfileById }, { immediate: true })
+
         const route = useRoute();
         async function getProfileById() {
             try {
@@ -95,9 +100,10 @@ export default {
             getPostsByCreatorId();
         });
         return {
-            profile: computed(() => AppState.activeProfile),
             posts: computed(() => AppState.posts),
-            account: computed(() => AppState.account)
+            account: computed(() => AppState.account),
+            profile: computed(() => AppState.activeProfile)
+            // profile
         };
     },
     components: { PostCard, EditProfileModal }
