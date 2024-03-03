@@ -24,7 +24,7 @@
         <!-- TODO hook up likes -->
         <!-- <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i> -->
         <p v-if="post.likeIds" class="pb-0 mb-1">{{ post.likeIds.length }} Likes
-            <span class="fs-4">
+            <span v-if="account" role="button" @click="likeAndUnlikePost(`${post.id}`)" class="fs-4">
                 <i class="mdi mdi-heart"></i>
                 <i class="mdi mdi-heart-outline"></i>
             </span>
@@ -32,13 +32,15 @@
     </div>
 </template>
 
-
+<!-- (`${post.id}, ${post.liked}`) -->
 <script>
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { Account } from '../models/Account.js';
 import { Post } from '../models/Post.js';
 import { logger } from '../utils/Logger.js';
 import { AppState } from '../AppState.js';
+import Pop from '../utils/Pop.js';
+import { postsService } from '../services/PostsService.js';
 
 export default {
     props: {
@@ -47,8 +49,20 @@ export default {
     },
     setup() {
         return {
-            account: computed(() => AppState.account)
+            account: computed(() => AppState.account),
+            profile: computed(() => AppState.profile),
 
+            async likeAndUnlikePost(postId) {
+                try {
+                    logger.log('liking post', postId)
+                    // logger.log(post.liked)
+                    await postsService.likeAndUnlikePost(postId)
+
+                } catch (error) {
+                    Pop.error(error)
+                }
+            }
+            // 
         }
     }
 }

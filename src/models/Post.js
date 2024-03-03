@@ -11,6 +11,7 @@ export class Post {
         // this.dateUpdatedAt = new Date(data.updatedAt).toLocaleDateString
         this.creator = data.creator
         this.likesArray = data.likes
+        this.liked = false
     }
 }
 

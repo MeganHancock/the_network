@@ -1,6 +1,6 @@
 <template>
     <div class="container ">
-        <section v-if="profile" class="row ">
+        <section v-if="profile" :key="profile.id" class="row ">
             <div class="col-12 border border-secondary me-1 m-3 px-0 pt-0 pb-0 rounded-3 shadow">
                 <img :src="profile.coverImg" alt="" class="cover-img w-100 rounded-top-3">
                 <div class="d-flex justify-content-between">
@@ -34,7 +34,7 @@
                         <i class="mdi mdi-account-edit display-3" title="Edit Your Profile" role="button"></i>
                     </button>
 
-                    <EditProfileModal :profile="profileKey" />
+                    <EditProfileModal :account="account.id" />
 
                 </div>
 
@@ -53,7 +53,7 @@
             </div> -->
 
             <div class="col-md-8 ms-md-4">
-                <section v-for=" post  in  posts " class="row">
+                <section v-for=" post  in  posts " :key="profile.id" class="row">
                     <div class="col-12 border border-secondary px-3 pt-3 pb-0 rounded-3 shadow mb-4">
                         <PostCard :post="post" />
 
@@ -65,7 +65,7 @@
 
             <div class="col-md-3 d-md-block d-none d-flex justify-content-center">
                 <section class="row justify-content-center">
-                    <div v-for="ad in ads" class="col-12 mb-4">
+                    <div v-for="ad in ads" :key="ad.id" class="col-12 mb-4">
                         <AdComponent :ad="ad" />
                         <!-- <img :src="ad.tall" :alt="ad.title" class="img-fluid rounded-3 shadow border border-secondary w-100"> -->
                     </div>
@@ -93,12 +93,14 @@ import { adsService } from '../services/AdsService.js';
 
 export default {
     setup() {
-        // const profile = computed(() => AppState.activeProfile)
+        // const posts = computed(() => AppState.posts)
 
         // watch(profile, () => { getProfileById }, { immediate: true })
-        // watch(account, () => { getProfileById }, { immediate: true })
+        // watch(posts, () => { getPosts }, { immediate: true })
 
         const route = useRoute();
+
+
         async function getProfileById() {
             try {
                 const profileId = route.params.profileId;
