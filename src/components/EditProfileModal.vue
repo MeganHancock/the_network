@@ -1,8 +1,4 @@
 <template>
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
     <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -76,6 +72,17 @@
                         </section>
                     </div>
 
+                    props: {
+                    blog: { type: Blog, required: true }
+                    },
+
+
+
+
+
+
+
+
 
                     ...
                 </div>
@@ -90,9 +97,18 @@
 
 
 <script>
+import { Profile } from '../models/Profile.js';
+import { computed } from 'vue';
+import { AppState } from '../AppState.js';
+
 export default {
+    props: {
+        profile: { type: Profile, required: true }
+    },
     setup() {
-        return {}
+        return {
+            profile: computed(() => AppState.account)
+        }
     }
 }
 </script>

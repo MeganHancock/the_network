@@ -19,8 +19,6 @@
                     </div>
 
                 </div>
-
-
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="ms-3">
                         <h1 class="mt-2">{{ profile.name }}</h1>
@@ -30,14 +28,13 @@
 
 
                     <!-- TODO make this an edit profile button -->
-                    <button v-if="account.id && account.id == profile.id" type="button" data-bs-toggle="modal"
-                        data-bs-target="#modal" class="border-0 m-1">
+
+                    <button v-if="account.id && account.id == profile.id" type="button" class="border-0 m-1"
+                        data-bs-toggle="modal" data-bs-target="#modal">
                         <i class="mdi mdi-account-edit display-3" title="Edit Your Profile" role="button"></i>
                     </button>
 
-
-
-
+                    <EditProfileModal :profile="profile" />
 
                 </div>
 
@@ -65,6 +62,7 @@ import { profileService } from '../services/ProfileService.js';
 import { AppState } from '../AppState.js';
 import PostCard from '../components/PostCard.vue';
 import { postsService } from '../services/PostsService.js';
+import EditProfileModal from '../components/EditProfileModal.vue';
 
 export default {
     setup() {
@@ -102,7 +100,7 @@ export default {
             account: computed(() => AppState.account)
         };
     },
-    components: { PostCard }
+    components: { PostCard, EditProfileModal }
 }
 </script>
 <style lang="scss" scoped>
