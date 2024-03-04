@@ -16,6 +16,6 @@ export const AppState = reactive({
   ads: [],
 
   searchQuery: '',
-  currentPage: 0,
-  totalPages: 0
+  currentPage: 1,
+  totalPages: 1
 })

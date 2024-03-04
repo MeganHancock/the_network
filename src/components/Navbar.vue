@@ -1,5 +1,5 @@
-<template>
-  <nav class="navbar navbar-expand-sm  px-3">
+<template class="">
+  <nav class="navbar navbar-expand-sm  px-3  nav-bg">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <!-- <img alt="logo" src="../assets/img/cw-logo.png" height="45" /> -->
@@ -42,8 +42,7 @@
         </button>
       </div>
       <Login />
-    </div>
-  </nav>
+    </div></nav>
 </template>
 
 <script>
@@ -103,6 +102,10 @@ async searchPosts(){
 <style scoped>
 a:hover {
   text-decoration: none;
+}
+
+.nav-bg{
+  background-color: white;
 }
 
 .nav-link {

@@ -34,11 +34,34 @@
 
 
     </section>
+
+  <section class="row text-center ">
+    <div class="col-12">
+      <button class="ms-2" @click="changePage(currentPage - 1)" ><i class="mdi mdi-arrow-left"></i> Previous Page</button>
+      <button @click="changePage(currentPage + 1)" >Next Page<i class="mdi mdi-arrow-right"></i> </button>
+    </div>
+  </section>
+
+  <!-- <RouterLink :to="{query: {page: currentPage - 1}}" :class="{disabled: currentPage == 1}">
+    <button class="" :disabled="currentPage == 1">
+      <i class="mdi mdi-arrow-left">Previous Page</i>
+    </button>
+  </RouterLink>
+
+    <RouterLink :to="{query: {page: currentPage + 1}}" :class="{disabled: currentPage == totalPages}">
+    <button class="" :disabled="currentPage == totalPages">
+        Next Page<i class="mdi mdi-arrow-right"></i>
+    </button>
+  </RouterLink> -->
+
+
+
+
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { postsService } from '../services/PostsService.js';
 import { adsService } from '../services/AdsService.js';
 import Pop from '../utils/Pop.js';
@@ -47,9 +70,15 @@ import { AppState } from "../AppState.js"
 import PostCard from '../components/PostCard.vue';
 import PostForm from '../components/PostForm.vue';
 import AdComponent from '../components/AdComponent.vue';
+import { RouterLink } from 'vue-router';
+import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 export default {
   setup() {
+
+
+    
     async function getPosts() {
       try {
         await postsService.getPosts();
@@ -74,16 +103,52 @@ export default {
       // logger.log('home page mounted')
       getPosts();
       getAds();
+
+      // const route = useRoute()
+
+      // watch(route, ()=>{
+      //   const pageNumber = route.query.page
+      //   logger.log('route changed!', pageNumber)
+      //   if(!pageNumber){
+      //     getPosts()
+      //   } else {
+      //     changePage(pageNumber)
+      //   }
+      // },
+      // {immediate: true})
+
+      
+
+
+
     });
     return {
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
-      ads: computed(() => AppState.ads)
+      ads: computed(() => AppState.ads),
+
+
+      searchQuery: computed(()=> AppState.searchQuery),
+      currentPage: computed(() => AppState.currentPage),
+      totalPages: computed(() => AppState.totalPages),
+
+// changePage
+async changePage(pageNumber){
+        try {
+          logger.log('changing page')
+          await postsService.changePage(pageNumber)
+          } catch (error) {
+          Pop.error(error)
+        }
+      }
+
+      
+
     };
   },
   components: { PostCard },
   components: { AdComponent },
-  components: { PostForm }
+  components: { PostForm, RouterLink }
 }
 </script>
 

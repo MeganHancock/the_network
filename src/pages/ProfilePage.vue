@@ -1,6 +1,6 @@
 <template>
     <div class="container ">
-        <section v-if="profile" :key="profile.id" class="row ">
+        <section v-if="profile && !searchQuery" :key="profile.id" class="row ">
             <div class="col-12 border border-secondary me-1 m-3 px-0 pt-0 pb-0 rounded-3 shadow">
                 <img :src="profile.coverImg" alt="" class="cover-img w-100 rounded-top-3">
                 <div class="d-flex justify-content-between">
@@ -76,11 +76,31 @@
         </section>
 
     </div>
+
+    <RouterLink :to="{query: {page: currentPage - 1}}" :class="{disabled: currentPage == 1}">
+    <button class="" :disabled="currentPage == 1">
+      <i class="mdi mdi-arrow-left">Previous Page</i>
+    </button>
+  </RouterLink>
+
+    <RouterLink :to="{query: {page: currentPage + 1}}" :class="{disabled: currentPage == totalPages}">
+    <button class="" :disabled="currentPage == totalPages">
+        Next Page<i class="mdi mdi-arrow-right"></i>
+    </button>
+  </RouterLink>
+
+
+  <!-- <section class="row text-center ">
+    <div class="col-12">
+      <button class="me-2" @click="changePage(currentPage - 1)" ><i class="mdi mdi-arrow-left"></i> Previous Page</button>
+      <button @click="changePage(currentPage + 1)" >Next Page<i class="mdi mdi-arrow-right"></i> </button>
+    </div>
+  </section> -->
 </template>
 
 
 <script>
-import { useRoute } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { computed, onMounted, watch } from 'vue';
@@ -94,11 +114,6 @@ import { adsService } from '../services/AdsService.js';
 
 export default {
     setup() {
-        // const posts = computed(() => AppState.posts)
-
-        // watch(profile, () => { getProfileById }, { immediate: true })
-        // watch(posts, () => { getPosts }, { immediate: true })
-
         const route = useRoute();
 
 
@@ -142,8 +157,22 @@ export default {
             posts: computed(() => AppState.posts),
             account: computed(() => AppState.account),
             profile: computed(() => AppState.activeProfile),
-            ads: computed(() => AppState.ads)
-            // profile
+            ads: computed(() => AppState.ads),
+            searchQuery: computed(()=> AppState.searchQuery),
+            currentPage: computed(() => AppState.currentPage),
+            totalPages: computed(() => AppState.totalPages),
+            
+            async changePage(pageNumber){
+        try {
+            if(!searchQuery){
+                await postsService.changePage(pageNumber)
+            } else{ await postsService.changePageWithSearch(pageNumber, searchQuery)}
+            } catch (error) {
+            Pop.error(error)
+        }   }
+            
+
+
         };
     },
     components: { PostCard, EditProfileModal, AdComponent }
@@ -166,5 +195,10 @@ export default {
     // position: absolute;
     transform: translateY(-8vh);
     margin-bottom: -8vh;
+}
+
+.disabled{
+  cursor: not-allowed;
+  pointer-events: none;
 }
 </style>

@@ -15,6 +15,7 @@ class SearchService {
         const foundPosts = response.data.posts.map(postPOJO => new Post(postPOJO))
         AppState.posts = foundPosts
         logger.log(foundPosts)
+        // $this.emit('foundPost')
     }
     // async searchUsers(searchQuery) {
     //     const response = await api(`/api/profiles?query=${searchQuery}`)

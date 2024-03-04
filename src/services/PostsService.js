@@ -12,6 +12,8 @@ class PostsService {
         const foundPosts = response.data.posts.map(postPOJO => new Post(postPOJO))
         // logger.log('posts response mapped', foundPosts)
         AppState.posts = foundPosts
+        AppState.currentPage = response.data.page
+        AppState.totalPages = response.data.totalPages
     }
 
     async getPostsByCreatorId(profileId) {
@@ -19,6 +21,8 @@ class PostsService {
         // logger.log('posts found?', response.data.posts)
         const foundPosts = response.data.posts.map(postsPOJO => new Post(postsPOJO))
         AppState.posts = foundPosts
+        AppState.currentPage = response.data.page
+        AppState.totalPages = response.data.totalPages
     }
 
     async postNewPost(formData) {
@@ -26,6 +30,8 @@ class PostsService {
         logger.log('created post', response.data)
         const newPost = new Post(response.data)
         AppState.posts.push(newPost)
+        AppState.currentPage = response.data.page
+        AppState.totalPages = response.data.totalPages
     }
 
     async likeAndUnlikePost(postId) {
@@ -42,6 +48,28 @@ class PostsService {
         const response = await api.delete(`api/posts/${postId}`)
         logger.log('removed post', response.data)
     }
+
+    async changePage(pageNumber) {
+        const response = await api.get(`/api/posts?page=${pageNumber}`)
+        logger.log('change page', response.data)
+        const foundPosts = response.data.posts.map(postsPOJO => new Post(postsPOJO))
+        AppState.posts = foundPosts
+        AppState.currentPage = response.data.page
+        AppState.totalPages = response.data.totalPages
+    }
+
+    async changePageWithSearch(pageNumber, searchQuery) {
+        logger.log(`Query: ${searchQuery}, page: ${pageNumber}`)
+    }
+
+    // async changePageWithSearchQuery(searchQuery, pageNumber) {
+    //     logger.log(`Query: ${searchQuery}, page: ${pageNumber}`)
+
+    //     const response = await movieApi.get(`search/movie?query=${searchQuery}&page=${pageNumber}`)
+    //     logger.log('CHANGING PAGE AND SEARCHING', response.data)
+    //     AppState.searchQuery = searchQuery
+    //     _handleMovieResponse(response)
+    //   }
 
 }
 
