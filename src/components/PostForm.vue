@@ -1,17 +1,17 @@
 <template>
     <div class="col-12 border border-secondary m-3 py-3 ps-0 rounded-3 shadow">
         <section class="row">
-            <div class="col-1">
-                <img :src="account.picture" :alt="account.name" class="creator-picture m-2 me-2 d-md-block d-none">
+            <div class="col-1 text-center ms-3">
+                <img :src="account.picture" :alt="account.name" class="creator-picture ms-2 me-2 d-md-block d-none">
             </div>
 
-            <div class="col-md-10 ms-1">
+            <div class="col-md-10 ">
                 <form @submit.prevent="postNewPost()">
+                    <label for="floatingTextarea2"><p class="fs-3 pb-0">What's on your mind?</p></label>
                     <div class="form-floating flex-fill">
-                        <textarea v-model="formData.body" class="form-control w-100 h-100  flex-fill ms-1"
+                        <textarea v-model="formData.body" label="What's on your mind?" class="form-control w-100 h-100  flex-fill ms-1"
                             placeholder="What's on your mind?" id="formImgUrl"
                             style="height: 100px; width: 100vh"></textarea>
-                        <label for="floatingTextarea2"></label>
                     </div>
 
                     <div class="d-flex justify-content-between ms-0 ">

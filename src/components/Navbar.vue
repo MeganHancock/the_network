@@ -3,7 +3,7 @@
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <!-- <img alt="logo" src="../assets/img/cw-logo.png" height="45" /> -->
-        <i class="mdi mdi-home"></i>
+        <i class="mdi mdi-home fs-3"></i>
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -105,11 +105,18 @@ a:hover {
 }
 
 .nav-bg{
-  background-color: white;
+  background-color: lightgrey;
 }
 
 .nav-link {
   text-transform: uppercase;
+}
+
+.creator-picture {
+    height: 6vh;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .navbar-nav .router-link-exact-active {

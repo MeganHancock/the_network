@@ -53,11 +53,9 @@
         Next Page<i class="mdi mdi-arrow-right"></i>
     </button>
   </RouterLink> -->
+</div>
 
 
-
-
-  </div>
 </template>
 
 <script>

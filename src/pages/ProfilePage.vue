@@ -75,7 +75,7 @@
             </div>
         </section>
 
-    </div>
+    
 
     <!-- <RouterLink :to="{query: {page: currentPage - 1}}" :class="{disabled: currentPage == 1}">
     <button class="" :disabled="currentPage == 1">
@@ -96,6 +96,7 @@
       <button :disabled="currentPage == totalPages" @click="changePage(currentPage + 1, profile.id)" >Next Page<i class="mdi mdi-arrow-right"></i> </button>
     </div>
   </section>
+</div>
 </template>
 
 
