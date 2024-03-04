@@ -48,7 +48,7 @@
         <p v-if="post.likeIds" class="pb-0 mb-1">{{ post.likeIds.length }} Likes
             <span v-if="account" role="button" @click="likeAndUnlikePost(`${post.id}`)" class="fs-4">
                 <i class="mdi mdi-heart"></i>
-                <i class="mdi mdi-heart-outline"></i>
+                <!-- <i class="mdi mdi-heart-outline"></i> -->
             </span>
         </p>
     </div>

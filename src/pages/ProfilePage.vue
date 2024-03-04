@@ -54,7 +54,7 @@
             </div> -->
 
             <div class="col-md-8 ms-md-4">
-                <section v-for=" post  in  posts " :key="profile.id" class="row">
+                <section v-for=" post  in  posts "  class="row">
                     <div class="col-12 border border-secondary px-3 pt-3 pb-0 rounded-3 shadow mb-4">
                         <PostCard :post="post" />
 

@@ -14,14 +14,15 @@
       <ul class="navbar-nav me-auto">
         <li>
 
-
+<form @submit.prevent="searchPostsAndUsers()">
           <div class="input-group m-3">
-            <input type="text" class="form-control" placeholder="Find a user or post..." aria-label="Recipient's username"
+            <input v-model="editableSearchQuery" type="text" class="form-control" placeholder="Find a user or post..." aria-label="Search"
               aria-describedby="button-addon2">
-            <router-link :to="{ name: 'SearchResults' }">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-            </router-link>
+              <button class="btn btn-outline-secondary" type="submit" id="button-addon2"> <i class="mdi mdi-magnify"></i> </button>
           </div>
+        </form>
+
+
           <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
             About
           </router-link> -->
@@ -39,19 +40,37 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import { logger } from '../utils/Logger.js';
+import { AppState } from '../AppState.js';
+import { searchService } from '../services/SearchServices.js';
+import Pop from '../utils/Pop.js';
 export default {
   setup() {
 
-    const theme = ref(loadState('theme') || 'light')
+    const editableSearchQuery = ref('')
+
+        const theme = ref(loadState('theme') || 'light')
 
     onMounted(() => {
       document.documentElement.setAttribute('data-bs-theme', theme.value)
     })
 
     return {
+      editableSearchQuery,
+      savedSearch: computed(()=> AppState.searchQuery),
+
+async searchPostsAndUsers(){
+  try {
+    logger.log('searching for', editableSearchQuery.value)
+    await searchService(editableSearchQuery.value)
+      } catch (error) {
+    Pop.error(error)
+  }
+},
+
       theme,
       toggleTheme() {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
