@@ -5,9 +5,10 @@ import { api } from "./AxiosService.js"
 
 class SearchService {
 
-    async searchPostsAndUsers(searchQuery) {
+    async searchPosts(searchQuery) {
+        // const userResponse = await api(`/api/profiles?query=${searchQuery}`)
         const response = await api(`/api/posts?query=${searchQuery}`)
-        logger.log('seearch service', response.data)
+        // logger.log('seearch service', userResponse.data, postResponse.data)
 
         AppState.searchQuery = searchQuery
 
@@ -15,6 +16,16 @@ class SearchService {
         AppState.posts = foundPosts
         logger.log(foundPosts)
     }
+    // async searchUsers(searchQuery) {
+    //     const response = await api(`/api/profiles?query=${searchQuery}`)
+    //     logger.log('seearch service', response.data)
+
+    //     AppState.searchQuery = searchQuery
+
+    //     const foundPosts = response.data.posts.map(postPOJO => new Post(postPOJO))
+    //     AppState.posts = foundPosts
+    //     logger.log(foundPosts)
+    // }
 }
 
 export const searchService = new SearchService()

@@ -14,13 +14,20 @@
       <ul class="navbar-nav me-auto">
         <li>
 
-<form @submit.prevent="searchPostsAndUsers()">
+<form @submit.prevent="searchPosts()">
           <div class="input-group m-3">
-            <input v-model="editableSearchQuery" type="text" class="form-control" placeholder="Find a user or post..." aria-label="Search"
+            <input v-model="postSearchQuery" type="text" class="form-control" placeholder="Find a post..." aria-label="Search"
               aria-describedby="button-addon2">
               <button class="btn btn-outline-secondary" type="submit" id="button-addon2"> <i class="mdi mdi-magnify"></i> </button>
           </div>
         </form>
+<!-- <form @submit.prevent="searchUsers()">
+          <div class="input-group m-3">
+            <input v-model="userSearchQuery" type="text" class="form-control" placeholder="Find a user..." aria-label="Search"
+              aria-describedby="button-addon2">
+              <button class="btn btn-outline-secondary" type="submit" id="button-addon2"> <i class="mdi mdi-magnify"></i> </button>
+          </div>
+        </form> -->
 
 
           <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
@@ -50,7 +57,8 @@ import Pop from '../utils/Pop.js';
 export default {
   setup() {
 
-    const editableSearchQuery = ref('')
+    const userSearchQuery = ref('')
+    const postSearchQuery = ref('')
 
         const theme = ref(loadState('theme') || 'light')
 
@@ -59,17 +67,26 @@ export default {
     })
 
     return {
-      editableSearchQuery,
+      postSearchQuery,
+      userSearchQuery,
       savedSearch: computed(()=> AppState.searchQuery),
 
-async searchPostsAndUsers(){
+async searchPosts(){
   try {
-    logger.log('searching for', editableSearchQuery.value)
-    await searchService.searchPostsAndUsers(editableSearchQuery.value)
+    logger.log('searching for', postSearchQuery.value)
+    await searchService.searchPosts(postSearchQuery.value)
       } catch (error) {
     Pop.error(error)
-  }
-},
+    }},
+  
+//   async searchUsers(){
+//   try {
+//     logger.log('searching for', userSearchQuery.value)
+//     await searchService.searchUsers(userSearchQuery.value)
+//       } catch (error) {
+//     Pop.error(error)
+//   }
+// },
 
       theme,
       toggleTheme() {
