@@ -37,8 +37,8 @@
 
   <section class="row text-center ">
     <div class="col-12">
-      <button class="ms-2" @click="changePage(currentPage - 1)" ><i class="mdi mdi-arrow-left"></i> Previous Page</button>
-      <button @click="changePage(currentPage + 1)" >Next Page<i class="mdi mdi-arrow-right"></i> </button>
+      <button :disabled="currentPage == 1" class="ms-2" @click="changePage(currentPage - 1)" ><i class="mdi mdi-arrow-left"></i> Previous Page</button>
+      <button :disabled="currentPage == totalPages" @click="changePage(currentPage + 1)" >Next Page<i class="mdi mdi-arrow-right"></i> </button>
     </div>
   </section>
 
