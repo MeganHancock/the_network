@@ -65,7 +65,7 @@ export default {
 async searchPostsAndUsers(){
   try {
     logger.log('searching for', editableSearchQuery.value)
-    await searchService(editableSearchQuery.value)
+    await searchService.searchPostsAndUsers(editableSearchQuery.value)
       } catch (error) {
     Pop.error(error)
   }
