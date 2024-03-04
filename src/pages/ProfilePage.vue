@@ -77,25 +77,25 @@
 
     </div>
 
-    <RouterLink :to="{query: {page: currentPage - 1}}" :class="{disabled: currentPage == 1}">
+    <!-- <RouterLink :to="{query: {page: currentPage - 1}}" :class="{disabled: currentPage == 1}">
     <button class="" :disabled="currentPage == 1">
       <i class="mdi mdi-arrow-left">Previous Page</i>
     </button>
-  </RouterLink>
+  </RouterLink> -->
 
-    <RouterLink :to="{query: {page: currentPage + 1}}" :class="{disabled: currentPage == totalPages}">
+    <!-- <RouterLink :to="{query: {page: currentPage + 1}}" :class="{disabled: currentPage == totalPages}">
     <button class="" :disabled="currentPage == totalPages">
         Next Page<i class="mdi mdi-arrow-right"></i>
     </button>
-  </RouterLink>
+  </RouterLink> -->
 
 
-  <!-- <section class="row text-center ">
+  <section class="row text-center ">
     <div class="col-12">
-      <button class="me-2" @click="changePage(currentPage - 1)" ><i class="mdi mdi-arrow-left"></i> Previous Page</button>
-      <button @click="changePage(currentPage + 1)" >Next Page<i class="mdi mdi-arrow-right"></i> </button>
+      <button :disabled="currentPage == 1" class="me-2" @click="changePage(currentPage - 1, profile.id)" ><i class="mdi mdi-arrow-left"></i> Previous Page</button>
+      <button :disabled="currentPage == totalPages" @click="changePage(currentPage + 1, profile.id)" >Next Page<i class="mdi mdi-arrow-right"></i> </button>
     </div>
-  </section> -->
+  </section>
 </template>
 
 
@@ -162,20 +162,19 @@ export default {
             currentPage: computed(() => AppState.currentPage),
             totalPages: computed(() => AppState.totalPages),
             
-            async changePage(pageNumber){
-        try {
-            if(!searchQuery){
-                await postsService.changePage(pageNumber)
-            } else{ await postsService.changePageWithSearch(pageNumber, searchQuery)}
+            async changePage(pageNumber, profileId){
+        try{
+                logger.log(pageNumber, profileId) 
+            await postsService.changePageOnProfile(pageNumber, profileId)
             } catch (error) {
             Pop.error(error)
-        }   }
-            
+          }
+        }
 
 
         };
     },
-    components: { PostCard, EditProfileModal, AdComponent }
+    components: { PostCard, EditProfileModal, AdComponent, RouterLink }
 }
 </script>
 <style lang="scss" scoped>

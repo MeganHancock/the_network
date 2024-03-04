@@ -58,17 +58,17 @@ class PostsService {
         AppState.totalPages = response.data.totalPages
     }
 
-    async changePageWithSearch(pageNumber, searchQuery) {
-        logger.log(`Query: ${searchQuery}, page: ${pageNumber}`)
+    async changePageOnProfile(pageNumber, profileId) {
+        const response = await api.get(`/api/profiles/${profileId}/posts?page=${pageNumber}`)
+        // const response = await api.get(`api/posts?creatorId=${profileId}`)
+        logger.log('change page', response.data)
+        const foundPosts = response.data.posts.map(postsPOJO => new Post(postsPOJO))
+        AppState.posts = foundPosts
+        AppState.currentPage = response.data.page
+        AppState.totalPages = response.data.totalPages
+
     }
 
-    // async changePageWithSearchQuery(searchQuery, pageNumber) {
-    //     logger.log(`Query: ${searchQuery}, page: ${pageNumber}`)
-
-    //     const response = await movieApi.get(`search/movie?query=${searchQuery}&page=${pageNumber}`)
-    //     logger.log('CHANGING PAGE AND SEARCHING', response.data)
-    //     AppState.searchQuery = searchQuery
-    //     _handleMovieResponse(response)
     //   }
 
 }
