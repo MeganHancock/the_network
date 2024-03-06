@@ -7,9 +7,9 @@
 
             <div class="col-md-10 ">
                 <form @submit.prevent="postNewPost()">
-                    <label for="floatingTextarea2"><p class="fs-3 pb-0">What's on your mind?</p></label>
+                    <label for="floatingTextarea2"><p class="fs-3 pb-0">What's on your mind, {{account.name}}?</p></label>
                     <div class="form-floating flex-fill">
-                        <textarea v-model="formData.body" label="What's on your mind?" class="form-control w-100 h-100  flex-fill ms-1"
+                        <textarea v-model="formData.body" label="What's on your mind, ?" class="form-control w-100 h-100  flex-fill ms-1"
                             placeholder="What's on your mind?" id="formImgUrl"
                             style="height: 100px; width: 100vh"></textarea>
                     </div>

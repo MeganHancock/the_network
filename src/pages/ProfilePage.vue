@@ -92,8 +92,8 @@
 
   <section class="row text-center ">
     <div class="col-12">
-      <button :disabled="currentPage == 1" class="me-2" @click="changePage(currentPage - 1, profile.id)" ><i class="mdi mdi-arrow-left"></i> Previous Page</button>
-      <button :disabled="currentPage == totalPages" @click="changePage(currentPage + 1, profile.id)" >Next Page<i class="mdi mdi-arrow-right"></i> </button>
+      <button :disabled="currentPage == 1" class="me-2 border-0" @click="changePage(currentPage - 1, profile.id)" ><i class="mdi mdi-arrow-left"></i> Previous Page</button>
+      <button :disabled="currentPage == totalPages" class="border-0" @click="changePage(currentPage + 1, profile.id)" >Next Page<i class="mdi mdi-arrow-right"></i> </button>
     </div>
   </section>
 </div>
@@ -163,6 +163,16 @@ export default {
             currentPage: computed(() => AppState.currentPage),
             totalPages: computed(() => AppState.totalPages),
             
+        //     async changePage(pageNumber, profileId, searchQuery){
+        // try{
+        //     if(!searchQuery){
+        //         logger.log(pageNumber, profileId) 
+        //     await postsService.changePageOnProfile(pageNumber, profileId)
+        //     } else { await this.postsService.changePageWithSearch(pageNumber, searchQuery)}
+        //     } catch (error) {
+        //     Pop.error(error)
+        //   }
+        // }
             async changePage(pageNumber, profileId){
         try{
                 logger.log(pageNumber, profileId) 

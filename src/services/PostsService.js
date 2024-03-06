@@ -36,12 +36,16 @@ class PostsService {
 
     async likeAndUnlikePost(postId) {
         logger.log('post service', postId)
+        // const indexToUpdate = AppState.posts.findIndex(post => post.id == postId)
+        // AppState.posts[indexToUpdate].likeIds.push(AppState.account.id)
         const response = await api.post(`/api/posts/${postId}/like`)
         logger.log('like response', response.data)
         const updatedPost = new Post(response.data)
         // logger.log('updated post', updatedPost.likeIds)
         // AppState.ac
-
+        const indexToUpdate = AppState.posts.findIndex(post => post.id == postId)
+        logger.log('index to update', indexToUpdate)
+        AppState.posts.splice(indexToUpdate, 1, updatedPost)
     }
 
     async removePost(postId) {
